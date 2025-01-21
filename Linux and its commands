@@ -34,3 +34,14 @@ The combination  of numbers is associated to users, groups and others.
 30. watch: The watch command in Linux is used to run a specified command periodically, showing the output in the terminal. 
 31. eval: used to evaluate and execute a string as a shell command.
 32. history: Used to see the history of the commands used.
+33. dd: The dd command in Linux is a powerful utility used for low-level data copying and conversion. 
+dd if=<input_file> of=<output_file> [options] where if: input file and of: output file
+34. free: Shows memory usage. free -g shows memory usage in gbs, -m in megabytes, -k in kilobytes(default)
+35. ssh: ssh (Secure Shell) command is used to securely log into a remote server or device, execute commands on it, and transfer data securely over an encrypted connection. It is commonly used for remote administration and management of systems.
+ssh-keygen -t rsa: generates a public private key pair to authenticate the users
+36. ip: Shows network interfaces, routing tables and configurations
+37. ifconfig: Used to configure or tune a system. It also assigns IP addresses. ifconfig -a: Shows all interfaces even if they are down, ifconfig -s: Shows a short list.
+38. ip address: Shows the Ip addresses of all network devices.
+
+
+35. 

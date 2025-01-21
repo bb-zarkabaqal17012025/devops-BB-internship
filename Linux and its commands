@@ -42,6 +42,8 @@ ssh-keygen -t rsa: generates a public private key pair to authenticate the users
 36. ip: Shows network interfaces, routing tables and configurations
 37. ifconfig: Used to configure or tune a system. It also assigns IP addresses. ifconfig -a: Shows all interfaces even if they are down, ifconfig -s: Shows a short list.
 38. ip address: Shows the Ip addresses of all network devices.
-
-
-35. 
+39. netstat -a: Lists all listening and non listening ports.
+40. netstat -at: Lists all tcp ports.
+41. nslookup [options]: network administration tool used to query Domain Name System (DNS) servers. It retrieves information such as IP addresses, domain names, and DNS record types. This is useful for troubleshooting DNS issues or verifying DNS configurations.
+42. curl: Used to transfer data to or from a server using various network protocols.
+43. tr: Used to translate, delete, or squeeze characters from standard input and write the result to standard output. 

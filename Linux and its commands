@@ -25,4 +25,12 @@ Baisc commands used in Linux:
 eg chmod 777 abc.txt 
 The combination  of numbers is associated to users, groups and others. 
 0: No permission, 1: Execute permission, 2: Write permission, 4: Read permission. So, 4+2+1=7 Stands for all permissions.
-24. 
+24. lsof and lsof -u <user-name>: List of open files and list of open files opened by a specific user.
+25. id: Gives id of users.
+26. tar: tar -cvf <file-name> <source-folder> to zip files of .tar format. tar -xvf <file-name> <source-folder> to unzip files of .tar format.
+27. cut: cut -c1-2 file1.txt: will show only 1-2 cols of the text in file1.txt
+28. sed: To edit the text inside a file
+29. uniq: Prints only the unique lines in a file
+30. watch: The watch command in Linux is used to run a specified command periodically, showing the output in the terminal. 
+31. eval: used to evaluate and execute a string as a shell command.
+32. history: Used to see the history of the commands used.

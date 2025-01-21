@@ -16,3 +16,13 @@ Baisc commands used in Linux:
 15. mv: Moves files( deletes from original location)
 16. rm: Removes files
 17. mkdir: Creates new  directory
+18. rmdir: Removes directories, can remove only empty directories but with the use of appropriate flags, we can remove empty directories as well
+19. grep: Used to search a file
+20. sort: Used to sort alphabetically
+21. sort -r: Returns result in reverse order
+22. chown: Used to change the owner and group of the file
+23. chmod: Used to change the permissions 
+eg chmod 777 abc.txt 
+The combination  of numbers is associated to users, groups and others. 
+0: No permission, 1: Execute permission, 2: Write permission, 4: Read permission. So, 4+2+1=7 Stands for all permissions.
+24. 

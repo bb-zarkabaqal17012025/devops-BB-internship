@@ -1,0 +1,18 @@
+Baisc commands used in Linux:
+1. man: manual to get info about a specific command
+2. clear: To clear the screen
+3. pwd: Print working directory
+4. cd: Change directory
+5. echo: To print anything
+6. whoami: To print current user
+7. su: To switch to root user
+8. sudo bash: To switch to root user
+9. sudo: for users who do not have root permissions
+10. groupadd/groupdel: To create or delete groups
+11.touch: To create a new file
+12. vi: Opens text editor
+13. cat: Read, modify and concatenate files
+14.cp: Copy files (does not delete from original location)
+15. mv: Moves files( deletes from original location)
+16. rm: Removes files
+17. mkdir: Creates new  directory

@@ -109,6 +109,27 @@
 - Updated the Grafana dashboard document to outline the steps for identifying inefficient projects.
 - Studied Kubernetes architecture.
 
+### February 25
+- Started with Falco
+- Progressed in learning Kubernetes
+
+### February 26
+- Set up eks cluster and learnt to scale down the node group using CLI.
+- Progressed in Kubernetes.
+
+### February 27
+- Successfully set up falco and integrated it with Slack.
+  
+### February 28
+- Completed core concepts of Kubernetes and completed one practice test
+
+### March 3
+- Completed ReplicaSets, Deployments, Services and namespaces in the second chapter of the CKA course. Also completed their practice tests.
+
+### March 4
+- Studied about custom metrics in Prometheus and wrote a script for a custom metric which can then be queried by PromQL and can be used to create Grafana dashboard.
+- Exploring how to connect the python script with Prometheus configuration.
+- Studied Manual Scheduling in CKA course and completed its practice test.
 ---
 
 This document serves as a detailed log of my internship progress, capturing the skills and tools I have worked on so far. It will be continuously updated as I progress further.

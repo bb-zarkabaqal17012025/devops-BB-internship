@@ -130,6 +130,10 @@
 - Studied about custom metrics in Prometheus and wrote a script for a custom metric which can then be queried by PromQL and can be used to create Grafana dashboard.
 - Exploring how to connect the python script with Prometheus configuration.
 - Studied Manual Scheduling in CKA course and completed its practice test.
+
+### March 5
+- Wrote a script to read csv files from s3 uri and make custom metrics on the basis of the csv.
+- Started studying kube bench
 ---
 
 This document serves as a detailed log of my internship progress, capturing the skills and tools I have worked on so far. It will be continuously updated as I progress further.

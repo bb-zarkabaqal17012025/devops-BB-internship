@@ -168,6 +168,9 @@
 - Worked on writing the script to generate cost per namespace from cast API
 - Studied Admission Controllers in CKA
 
+### March 18
+- Modified script to generate cost per team from two APIs.
+
 
 
 

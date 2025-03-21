@@ -171,6 +171,14 @@
 ### March 18
 - Modified script to generate cost per team from two APIs.
 
+### March 19
+- Further modified the scripts to generate data appropriately for report generation in cost generation of cast ai, now have to create allocation groups
+- Studied about Validating and Mutating Admission Controllers.
+
+### March 20
+- Wrote the generateReport function to write in the sheet in the format provided.
+- Validated correct data is returning from the API
+
 
 
 

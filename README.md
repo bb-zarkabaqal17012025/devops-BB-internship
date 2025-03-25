@@ -179,7 +179,14 @@
 - Wrote the generateReport function to write in the sheet in the format provided.
 - Validated correct data is returning from the API
 
+### March 21
+- Successfully modified the script to automatically generate weekly cost using CAST API.
+- Successfully created a Grafana dashboard to display critical metrics for CAST AI.
 
+### March 24
+- Started studying about Terraform.
+- Modified the CAST AI Grafana dashboard to include Eviction & rebalancing events, cost per namespace.
+- Wrote a script to automate the creation of allocation groups using CAST APIs in various clusters in CAST AI. Waiting for review.
 
 
 ---

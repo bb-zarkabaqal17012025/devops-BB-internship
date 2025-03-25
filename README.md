@@ -123,6 +123,8 @@
 ### February 28
 - Completed core concepts of Kubernetes and completed one practice test
 
+## March 2025
+
 ### March 3
 - Completed ReplicaSets, Deployments, Services and namespaces in the second chapter of the CKA course. Also completed their practice tests.
 

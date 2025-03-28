@@ -190,6 +190,36 @@
 - Modified the CAST AI Grafana dashboard to include Eviction & rebalancing events, cost per namespace.
 - Wrote a script to automate the creation of allocation groups using CAST APIs in various clusters in CAST AI. Waiting for review.
 
+### March 25
+- Created allocation groups for qa and staging cluster in CAST AI.
+- Wrote a script to generate weekly cost aggregation of qa cluster by using CAST API.
+- Created, modified and deleted an EC2 instance using Terraform.
+- Analysed the diff if we manually change the EC2 instance and then use "terraform apply".
+
+### March 26
+- Tried creating an ec2 instance using Terraform and Jenkins job.
+- Successfully created a script to generate a weekly cost aggregation report of clusters: prod, hqa, qa, uat.
+
+### March 27
+- Create a Jenkins pipeline to read terraform configuration files from a git repo and create an ec2 instance.
+- Learned about variables and outputs in Terraform
+- Completed the CAST AI cost aggregation project and transfered its ownership to devops-bot from Sentinels
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 

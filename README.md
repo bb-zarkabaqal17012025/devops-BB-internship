@@ -205,14 +205,63 @@
 - Learned about variables and outputs in Terraform
 - Completed the CAST AI cost aggregation project and transfered its ownership to devops-bot from Sentinels
 
+## April 2025
 
+### April 1
+- Created a daily efficiency report for workloads using Cast API for clusters: prod, uat, hqa, qa and staging. Waiting for review.
+- Working on Terraform diff through Jenkins job.
 
+### April 2
+- Created multiple jobs that create resources using Terraform code in github repo.
+- Created a main Jenkins job that triggers these multiple jobs and sends a slack notification in case of a diff.
+- Working on modifying it to be more efficient. 
 
+### April 3
+- Completed the script to get the complete detailed output for Terraform diff and completed the documentation.
+- Documentation: https://bigbasket.atlassian.net/wiki/x/QIFj5g?atlOrigin=eyJpIjoiNTE1ODFkYTY1ZjU1NDY2NjgzM2I1ODk0MmYwYzhkZTUiLCJwIjoiYyJ9
+- Working on the Learning Document
 
+### April 7
+- Fine tuned the diff-checker job to send diffs.
+- Triggered the diff-checker job in qas-iac successfully. It is sending the diff notifications on slack,
 
+### April 8
+- Triggered the job for various jobs in non-prod.
+- Working on providing a summary for various jobs and their diffs.
+- Learning about tfstate.
 
+### April 9
+- Triggered the job in qa-iac and created an excel sheet to store summarised drifts.
+- Wrote the diff-checker-trial in prod-iac and created an excel sheet to store summarised drifts.
+- Studied about modules.
 
+### April 10
+- Studied remote backends in Terraform.
+- Studied Provisioners and null_resource.
+- Will work on understanding the IaC repo.
 
+### April 11
+- Successfully wrote Terraform config files for installing Kube-bench helm chart.
+- Successfully set up kube-bench using Helm Chart in sandbox eks cluster.
+- It is generating reports correctly.
+- Working on how to skip or bypass some rules by modifying the values.yaml file.
+
+### April 14
+- Standardised the Terraform script to install kube-bench as a helm, will work on making it compatible with bb-iac repo.
+- Working on loops, prioritisation of variables, import statement etc
+
+### April 15
+- Modified the terraform code to install Kube-bench as a helm according to bb-iac-resources repo.
+- Will push the code into a testing branch to check if it works correctly or not.
+- Completed the documentation for installation of Kube-bench using Terraform. The document is given below:
+https://bigbasket.atlassian.net/wiki/x/J4LC5g
+- Will start studying Security Hub for the next task.
+
+### April 16
+- Created vpc, route tables, internet gateway, public and private subnets using Terraform.
+- Successfully used for_each loop for creation of subnets.
+- Studied logging in CKA course.
+- Studying Security Hub in detail.
 
 
 

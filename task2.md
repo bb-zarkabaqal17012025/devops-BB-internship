@@ -27,78 +27,56 @@ Install dependencies with:
 ```bash
 pip install boto3 openpyxl
 ```
-Required Tags
-Each instance is expected to have the following tags:
+Required Tags:
+ Each instance is expected to have the following tags:
 
-patch
+- patch
+- ssm-key-automation
+- application_module
+- os
+- team
+- Name
 
-ssm-key-automation
-
-application_module
-
-os
-
-team
-
-Name
-
-How It Works
+### How It Works
 Region Setup
-The script targets the following AWS regions:
-
-ap-south-1
-
-us-east-1
-
-Workbook Initialization
+The script targets the following AWS regions: ap-south-1, us-east-1
+### Workbook Initialization
 A new Excel workbook is created. The default sheet is removed to maintain clarity.
 
-Instance Discovery
+### Instance Discovery
 For each region:
+- All EC2 instances are fetched using `describe_instances`.
+- Only instances in the `running` state are processed.
 
-All EC2 instances are fetched using describe_instances.
-
-Only instances in the running state are processed.
-
-Tag Validation
+### Tag Validation
 Each instance's tags are compared against the required tags. If any are missing, the instance is flagged.
 
-Excel Output
+### Excel Output
 Non-compliant instances are written to a new sheet named after the region. The following fields are included:
 
-InstanceId
+- InstanceId
+- InstanceType
+- Name
+- application_module
+- team
+- patch
+- os
+- ssm (from tag: `ssm-key-automation`)
+- State
 
-InstanceType
+Missing tag values are represented as `.` or left blank.
 
-Name
+### Save File
+The workbook is saved as `task2.xlsx` in the current working directory.
 
-application_module
-
-team
-
-patch
-
-os
-
-ssm (from tag: ssm-key-automation)
-
-State
-
-Missing tag values are represented as . or left blank.
-
-Save File
-The workbook is saved as task2.xlsx in the current working directory.
-
-Output Example
+## Output Example
 Each sheet will contain a table like:
 
+| InstanceId        | InstanceType | Name      | application_module | team     | patch | os    | ssm          | State  |
+|-------------------|--------------|-----------|---------------------|----------|-------|-------|--------------|--------|
+| i-0abc123def456   | t2.micro     | No name   | .                   | .        | .     | .     | Not tagged   | running|
 
-InstanceId	InstanceType	Name	application_module	team	patch	os	ssm	State
-i-0abc123def456	t2.micro	No name	.	.	.	.	Not tagged	running
-Running the Script
-bash
-Copy
-Edit
+### Running the Script
+
+```bash
 python script.py
-Notes
-This script is designed for internal compliance audits.

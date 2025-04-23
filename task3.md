@@ -1,62 +1,53 @@
-# EC2 Tag Automation Script
+# AWS EC2 Missing Tags Updater  
 
-This Python script helps automate the process of checking and updating missing or invalid tags on EC2 instances based on an Excel file. The script checks the `running` EC2 instances across specified AWS regions and compares their tags with the required tags specified in the input file (`missing_tags_instances.xlsx`). If any required tags are missing or contain invalid values, the script updates the instances with the correct tags.
+## Overview  
+This script reads an **Excel file (`missing_tags_instances.xlsx`)** containing EC2 instance details and updates missing or empty tags for **running** instances in AWS.  
 
-## Features
+## Functionality  
+- **Loads input data** from an Excel file.  
+- **Validates instance IDs** using a regex pattern.  
+- **Fetches EC2 instances** from AWS for the specified regions (`ap-south-1`, `us-east-1`).  
+- **Checks for missing or empty tags** based on the input file.  
+- **Updates tags** for running instances where necessary.  
 
-- Loads an input Excel file (`missing_tags_instances.xlsx`) containing EC2 instance IDs and their corresponding required tags.
-- Validates EC2 instance IDs and tag formats.
-- Scans EC2 instances across multiple AWS regions (`ap-south-1`, `us-east-1`).
-- Updates instances with missing or invalid tags based on the input data.
-- Handles instances with invalid or overly large tag values (greater than 256 characters).
+## Input  
+- **Excel File:** `missing_tags_instances.xlsx`  
+- **Columns in Excel:**  
+  - `InstanceId`  
+  - `InstanceType`  
+  - `Name`  
+  - `application_module`  
+  - `team`  
+  - `patch`  
+  - `os`  
+  - `ssm`  
+  - `State`  
 
-## Prerequisites
+## Output  
+- The script **validates and updates missing tags** on running EC2 instances.  
+- Prints messages for successful updates or errors.  
 
-- Python 3.x
-- AWS credentials configured (via AWS CLI, environment variables, or IAM roles)
-- Required Python libraries:
-  - `boto3`: AWS SDK for Python.
-  - `openpyxl`: Python library for reading and writing Excel files.
-  
-To install the required libraries, run:
+## Dependencies  
+- **Python**  
+- **boto3** (AWS SDK for Python)  
+- **openpyxl** (for reading Excel files)  
 
-```bash
-pip install boto3 openpyxl
-```
+## Usage  
+1. Install dependencies:  
+   ```bash
+   pip install boto3 openpyxl
+   ```  
+2. Ensure AWS credentials are configured (`~/.aws/credentials`).  
+3. Place `missing_tags_instances.xlsx` in the script directory.  
+4. Run the script:  
+   ```bash
+   python script.py
+   ```  
+5. Check the console for tag update logs.  
 
-## Input Excel File
+## Notes  
+- The script only processes **running** instances.  
+- It updates only **missing or empty tags** based on the Excel file.  
+- If an instance ID in the Excel file is invalid, it is ignored.  
 
-The script reads an Excel file named `missing_tags_instances.xlsx`. The file should have the following columns, starting from the second row:
-
-| InstanceId        | InstanceType | Name     | application_module | team    | patch | os    | ssm        | State   |
-|-------------------|--------------|----------|--------------------|---------|-------|-------|------------|---------|
-| i-0abc123def456   | t2.micro     | WebServer| module1            | dev     | patch1| linux | ssm-key-1  | running |
-
-### Columns:
-
-- `InstanceId`: The EC2 instance ID (e.g., `i-0abc123def456`).
-- `InstanceType`: EC2 instance type (e.g., `t2.micro`).
-- `Name`: Name of the EC2 instance.
-- `application_module`: Application module tag.
-- `team`: Team associated with the instance.
-- `patch`: Patch version or tag.
-- `os`: Operating system of the instance.
-- `ssm`: SSM key used for automation (should be a tag with key `ssm-key-automation`).
-- `State`: The current state of the instance (e.g., `running`).
-
-The script uses this file to determine the expected tags for each instance.
-
-## How It Works
-
-### Load Input Data
-
-The script loads the input Excel file (`missing_tags_instances.xlsx`) and validates each EC2 instance ID format. If any instance ID is invalid, a message is printed.
-
-```python
-input_data = {}
-for row in input_sheet.iter_rows(min_row=2, values_only=True):
-    instance_id = row[0]
-    if instance_id and instance_id_pattern.match(instance_id):
-        input_data[instance_id] = { ... }
-    elif instance_id:
-        print(f"Invalid instance ID format: {instance_id}")
+---

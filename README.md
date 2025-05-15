@@ -263,10 +263,154 @@ https://bigbasket.atlassian.net/wiki/x/J4LC5g
 - Studied logging in CKA course.
 - Studying Security Hub in detail.
 
+### April 17
+- Deep dived into studyingAWS Security hub.
+- Completed the documentation about AWS Security Hub.
+- The documentation: https://bigbasket.atlassian.net/wiki/x/EYAI5w
+- Studied Updates and Rollbacks in CKA course
+
+### April 21
+- Studied HPA and manual scaling in CKA Course
+- Working on a Grafana dashboard to represent inefficient PDBs.
+- Created a panel to showcase ineffiecient PDBs.
+- Working on representing min_replicas as well.
+
+### April 22
+- Created panels for PDB dashboard.
+- Created panels for representing min_replica, max_replica, current_Replicas.
+- Working on panels of PDBs.
+- Studied about VPA and difference between HPA and VPA.
+
+### April 23
+- Studied CKA course.
+- Working on studying the bb-iac repository.
+- Working on replicating eks cluster using terraform and running kube-bench on it.
+
+### April 24
+- Went through the code of bb-iac-resources.
+- Understood the base-infra.
+- Working on replicating the base-infra of the cluster.
+- Studied Backup and restore in CKA.
+
+### April 25
+- Worked on node associations in replica cluster.
+- Made changes in the service infrastructure.
+- Created target groups in replica cluster.
+- Facing issues in RBAC, will work on it.
+
+### April 28
+- ncountered an issue where nodes were stuck in Pending state; castai-agent and controller pods were not deploying.
+- Manually created node groups so that controller and castai-agent could be scheduled.
+- Faced a CrashLoopBackOff issue; identified and resolved by increasing the IMDSv2 hop limit.
+- After fixing, cluster successfully connected to CAST AI.
+- Deployed CoreDNS, kube-bench, EBS-CSI, and EFS-CSI drivers.
+- Generated the kube-bench report and are now working on remediating errors and warnings.
+
+### April 29
+- Investigated failure of kube-bench check 3.2.7 — Ensure that the --eventRecordQPS argument is set to 0 or a level which ensures appropriate event capture.
+- Tried to rectify by passing the flag as kubelet args and kubelet extra args.
+- Tried multiple variations including --kubelet-extra-args, --kubelet-args, and inline flag injection.
+- Verified using ps -ef | grep kubelet; the --eventRecordQPS flag is not present in the running kubelet process.
+- Contacted AWS team for support.
+- Identified that the bootstrap script is running twice, likely overwriting the initial kubelet arguments.
+- Currently working on a workaround to prevent duplicate bootstrap execution.
+
+### April 30
+- After AWS call, one node was showing "--event-qps=0".  To check if it was also visible in other new nodes, we cordoned a node and drained it. When the new node came, it did not show the "event-qps" flag.
+- We realised that there were two bootstrap scripts running, and the kubelet took the arguments from the first bootstrap file.
+- Talked to  CAST AI team about this. They said that we will have to add a block of code in order to send the extra kubelet args.
+- The sample code provided by the CAST AI team was failing because function calls can not be in .tfvars, they have to be in .tf.
+- Modified the code and added the extra code in locals and in terraform.tfvars.
+- In terraform.tfvars, added the kubelet config:
+```
+ha_node_configuration = {
+      worker_name_tag_suffix = "worker:HA"
+      tags_override          = {}
+      bootstrap_arguments    = "--kubelet-extra-args '--register-with-taints=HA=true:NoSchedule --node-labels=HA=true,environment=dev-qa'"
+      kubelet_config =  {
+          "eventRecordQPS" : 0
+      }
+    }
+```
+- In locals.tf, we added:
+``` 
+ kubelet_config       = jsonencode(lookup(value, "kubelet_config", { "event-qps" = 0 }))
+```
+- This addition worked successfully, the kubelet can successfully pick up the eventRecordQPS flag.
+- Cordoned and drained the ndoes to get the new nodes with the new configuration. Ran kube-bench again and it shows 13 pass and 0 fails.
+- Checking on warns, documenting those.
+
+## May 2025
+
+### May 2
+- Going through the warnings and found the following, I have also documented them in detail. Here is the link for the document: https://bigbasket.atlassian.net/wiki/x/wQGs5w
+- system:masters group and eks:addon-manager user are bound to cluster-admin role.
+- efs-csi-external-provisioner-role-describe-secrets ClusterRole allows listing and watching secrets.
+- Roles like cluster-admin, eks:addon-manager, and eks:cloud-controller-manager contain wildcards (*) in permissions.
+- Roles like admin, edit, and system:controller:job-controller allow pod creation.
+- Pods in castai-agent and kube-bench are using the default service account with token automount.
+- Several system and CAST AI pods auto-mount service account tokens.
+- cluster:admin ClusterRoleBinding uses the system:masters group.
+- ClusterRoles like admin, edit, and system:aggregate-to-edit contain bind/impersonate/escalate verbs.
+- Pods like aws-node, ebs-csi-node, efs-csi-controller, and kube-proxy run with privileged: true.
+- Also studied about TLS certificates in CKA course
+
+### May 5
+- Went through the warnings and found out the following:
+- Pods using hostNetwork: true were found, including aws-node, efs-csi-node, and kube-proxy pods, indicating they share the host’s network namespace.
+- Multiple containers do not explicitly set allowPrivilegeEscalation to false, which is a security risk; affected containers include castai, kube-bench, aws-node, ebs-csi, efs-csi, and kube-proxy.
+- The cluster uses amazon-k8s-cni with aws-network-policy-agent, which supports NetworkPolicy, but kube-bench may not recognize this.
+- No NetworkPolicies are defined in any namespace, which leaves workloads unprotected at the network level.
+- Several pods reference secrets via environment variables instead of mounted files, including pods in the castai-agent and kube-system namespaces.
+- No external secrets operators (e.g., external-secrets CRDs) were detected, indicating secrets are managed entirely within the cluster.
+- Some containers are missing a defined securityContext, which is essential for enforcing runtime security; affected pods belong to castai-agent, kube-bench, etc.
+- Many service accounts across various namespaces, including core system components, do not have associated IAM roles via eks.amazonaws.com/role-arn.
+- The EKS control plane endpoint is publicly accessible from 0.0.0.0/0, making it vulnerable to external threats.
+- Public access to the cluster is enabled, violating best practices for secure EKS deployments which recommend private-only endpoints.
+
+### May 6
+- Completed the Warns document: https://bigbasket.atlassian.net/wiki/spaces/~71202062ec8967a5434c45a95a9bad22d6fca5/pages/3886809537/Warnings+for+kube-bench
+- Facing some issues as a few warnings are coming even when there is no reason for warnings.
+- Studied Generation of ssl certificates for Kubernetes.
+
+### May 7
+- Discussed the kube-bench findings with the whole team.
+- Have to make some changes in the base-infra to mitigate some warnings.
+
+### May 8
+- Ammended the code for cluster qa-eks-msvcs-2-poc and disabled the enable_public_access, but in the cluster, it is still showing as enabled, so, working on that.
+- Installed Trivy on an ec2 instance
+- Tried to scan an outdated docker image in order to check if it shows vulnerability.
+- A precise report is getting displayed.
+- Studying  how to integrate it in Jenkins job and firstly generate a report.
 
 
 
+### May 9
+- Created a Jenkins job in my own Jenkins server in order to check if Trivy is working in Jenkins.
+- Created a new Jenkins job in build.bigbasket.com according to the structure of "supernovas-search-BuildImage" job.
+- Used Trivy to print the vulnerabilities report to the console.
+- Working on saving the generated report to a file.
 
+### May 12
+- Trying to get  a clear, readable format of trivy report.
+- Studying about Clair and how it compares to Trivy
+- Clair has some of issues: the releases also have not been updated from last yea. Will check on it.
+- Explored another image scanning tool called Grype.
+- Installed it and tried to generate a vulnerability report in an ec2 instance.
+- Here is the documentation: https://bigbasket.atlassian.net/wiki/x/sQGc6
+
+### May 13
+- Tried to parse the Trivy output and send a Slack message.
+- It is working and the summary of vulnerabilities can be sent to Slack channel.
+- Tried to abort the scan in case critical vulnerabilities were more than a specific number(here:5).
+- It is also working and I was able to abort the script if the Critical vulnerabilities were more than 5.
+- Here is the doc: https://bigbasket.atlassian.net/wiki/spaces/~71202062ec8967a5434c45a95a9bad22d6fca5/pages/3846897828/Trivy
+
+### May 14
+- Figuring out the version of ubuntu in search image.
+- Commited the kube-bench code in msvcs-3
+- Raised PR for that
 
 
 

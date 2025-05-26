@@ -413,7 +413,50 @@ ha_node_configuration = {
 - Raised PR for that
 
 
+### May 15
+- Started exploring the tool kubescape.
+- Studied how it works under the hood and what does it use for posture hardening, image scanning and runtime protection.
+- Installed it as a CLI tool in the poc cluster (which was used for kube-bench).
+- Generated a report and a compliance score against the NSA framework.
+- Ran kube-bench successfully in msvcs-3
 
+### May 16
+- Documented how to accept risks and exceptions
+- Started studying about Kubescape operator
+- Installed Kubescape operator but some CRDs are missing, working on that.
+- Found image vulnerabilities using kubescape operator
+
+### May 19
+- Working on the script to generate p80 p90 cpu p100 p110 memory per day min replica, max replica, cpu req, cpu limit, mem req, mem limit report.
+- Generated p80 and p90 for cpu in staging. Validating that.
+- Facing an error as too many API calls are being made
+
+### May 20
+- Generated some metrics for hqa.
+- Facing issues with percentile metrics.
+- Some namespaces and deployment names arent getting populated, I am looking into that.
+
+### May 21
+- Tried the script to scrape metrics.
+- Some data is getting populated correctly, some data is missing.
+- Completed the script for checking trusted relationship ARN in IAM roles, waiting for the ARN role.
+
+### May 22
+- Could not find the CRDs.
+- Repeatedly installed and uninstalled kubescape operator to check if scanning CRDs are getting installed or not.
+- Tried to run the cis benchmark check using kubescape CLI.
+- I have also updated the document: https://bigbasket.atlassian.net/wiki/x/DYBR6Q
+- Also worked on the automation script.
+
+### May 23
+- Tried to scan the images fro vulnerabilities using Kubescape.
+- Only CVE IDs can be seen and no descriptive title for the vulnerabilities.
+- Updated the doc: Kubescape
+
+### May 26
+- Working on scheduled scanning in Kubescape.
+- Working on runtime threat detection in kubescape.
+- Facing some errors.
 ---
 
 This document serves as a detailed log of my internship progress, capturing the skills and tools I have worked on so far. It will be continuously updated as I progress further.

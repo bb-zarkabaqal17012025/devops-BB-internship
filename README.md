@@ -457,6 +457,17 @@ ha_node_configuration = {
 - Working on scheduled scanning in Kubescape.
 - Working on runtime threat detection in kubescape.
 - Facing some errors.
+
+### May 27
+- Still getting missing crd error.
+- Checked official github hub and troubleshooting page but cant resolve the error.
+- Also checked the logs of the storage pod of kubescape which is working fine.
+- Manually created the missing crds, still scans are not stored. Working on it.
+
+### May 28
+- Debugged and I am able to see the individual reports of the deployments.
+- Have also added them in the doc
+- Updated doc: https://bigbasket.atlassian.net/wiki/spaces/~71202062ec8967a5434c45a95a9bad22d6fca5/pages/3914432525/Kubescape
 ---
 
 This document serves as a detailed log of my internship progress, capturing the skills and tools I have worked on so far. It will be continuously updated as I progress further.
